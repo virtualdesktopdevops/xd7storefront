@@ -21,7 +21,7 @@ class xd7storefront (
 	$deliveryControllersPort = 443, # XML port
 	$deliveryControllersTransportType = "HTTPS", # XML transport type
   $deliveryControllersLoadBalance = true,
-  $storefrontAuthMethods = ['ExplicitForms'],
+  $storefrontAuthMethods = ['ExplicitForms','IntegratedWindows'],
 	$https = false,
 	$sslCertificateSourcePath = '',
 	$sslCertificatePassword = '',

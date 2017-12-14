@@ -3,10 +3,10 @@ define xd7storefront::store (
   $xd7sitename,
   $xd7farmType,
   $deliverycontrollers,
-  $deliveryControllersTransportType,
-  $deliveryControllersPort,
+  $deliveryControllersTransportType = 'HTTPS',
+  $deliveryControllersPort = 443,
   $deliveryControllersLoadBalance = true,
-  $storefrontAuthMethods = ['ExplicitForms']
+  $storefrontAuthMethods = ['ExplicitForms','IntegratedWindows']
 ) 
 {  
   #Adds an authentication service to Storefront group/cluster. 
@@ -33,6 +33,12 @@ define xd7storefront::store (
    dsc_storevirtualpath => "/Citrix/${storeName}",
    dsc_virtualpath => "/Citrix/${storeName}Web"
   }->
+  
+  dsc_xd7storefrontreceiverauthenticationmethod{ "${storeName}ReceiverWebAuthenticationMethods":
+   dsc_virtualpath => '/Citrix/StoreWeb',
+   dsc_siteid => 1,
+   dsc_authenticationmethod => $storefrontAuthMethods,
+ }->
   
   #Adds a XenApp/XenDesktop farm/site to the store.
   dsc_sfstorefarm{ "${storeName}Farm":
