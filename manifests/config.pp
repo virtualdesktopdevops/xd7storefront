@@ -58,5 +58,28 @@ class xd7storefront::config inherits xd7storefront {
     require => Dsc_sfstore['DefaultStore']
   }
 
+  #Disable CRL checking. Causing excepssive delay when storefront logon page is displayed
+  #http://www.carlstalhood.com/storefront-3-5-tweaks/#crl
+  dsc_script{ 'CitrixBrokerServiceSSL':
+    dsc_getscript => 'Return @{ Result = $false) }',
+    dsc_testscript => 'Return $false',
+    dsc_setscript => 'Add-PSSnapin Citrix.DeliveryServices.Framework.Commands
+      Set-DSAssemblyVerification $false'
+    }
+
+  #Disable Customer Experience Improvement Program (CEIP) (HKLM:\SOFTWARE\Citrix\Telemetry\CEIP -Name 'Enabled' -Value "0x00000000") and restart CitrixTelemetryService
+  #http://www.carlstalhood.com/storefront-3-5-basic-configuration/#ceip
+  service{'CitrixTelemetryService':
+    ensure => 'running',
+    enable => true
+  }
+  
+  registry_value { 'HKLM\SOFTWARE\Citrix\Telemetry\CEIP':
+    path =>'HKLM\SOFTWARE\Citrix\Telemetry\CEIP',
+    ensure => present,
+    type   => 'dword',
+    data   => '0',
+    notify => Service['CitrixTelemetryService']
+  }
   
 }
