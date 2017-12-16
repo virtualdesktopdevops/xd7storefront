@@ -21,7 +21,7 @@ class xd7storefront (
 	$deliveryControllersPort = 443, # XML port
 	$deliveryControllersTransportType = "HTTPS", # XML transport type
   $deliveryControllersLoadBalance = true,
-  $storefrontAuthMethods = ['ExplicitForms'],
+  $storefrontAuthMethods = ['ExplicitForms','IntegratedWindows'],
 	$https = false,
 	$sslCertificateSourcePath = '',
 	$sslCertificatePassword = '',
@@ -31,13 +31,17 @@ class xd7storefront (
 )
 
 {
-  contain xd7storefront::install
+  contain xd7storefront::installwindowsfeatures
+  contain xd7storefront::installstorefront
   contain xd7storefront::config
+  contain xd7storefront::networkconfig
   contain xd7storefront::sslconfig
   #contain xd7storefront::service
   
-  Class['::xd7storefront::install'] ->
+  Class['::xd7storefront::installwindowsfeatures'] ->
+  Class['::xd7storefront::installstorefront'] ->
   Class['::xd7storefront::config'] ->
+  Class['::xd7storefront::networkconfig'] ->
   Class['::xd7storefront::sslconfig']
   #Class['::xd7storefront::service']
   

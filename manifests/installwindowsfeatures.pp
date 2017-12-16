@@ -1,4 +1,4 @@
-class xd7storefront::install inherits xd7storefront {
+class xd7storefront::installwindowsfeatures inherits xd7storefront {
   
   	dsc_windowsfeature{'iis':
 	  dsc_ensure => 'Present',
@@ -55,24 +55,30 @@ class xd7storefront::install inherits xd7storefront {
 	  dsc_name   => 'NET-Framework-45-ASPNET',
 	}->
 	
-	#Reste à activer...
-	#            'Web-Filtering',
-	#            'Web-Basic-Auth',
-	#            'Web-Windows-Auth',
-	#            'Web-Net-Ext45',
-	#            'Web-AppInit',,
-	#            'Web-ISAPI-Ext',
-	#            'Web-ISAPI-Filter',
+	dsc_windowsfeature{'Web-Basic-Auth':
+    dsc_ensure => 'Present',
+    dsc_name   => 'Web-Basic-Auth',
+  }->
+  
+  dsc_windowsfeature{'Web-Windows-Auth':
+    dsc_ensure => 'Present',
+    dsc_name   => 'Web-Windows-Auth',
+  }->
+  
+  dsc_windowsfeature{'Web-AppInit':
+    dsc_ensure => 'Present',
+    dsc_name   => 'Web-AppInit',
+  }
 	
-	dsc_xd7feature { 'XD7Storefront':
-	  dsc_role => 'Storefront',
-	  dsc_sourcepath => $sourcepath,
-	  dsc_ensure => 'present',
-		notify => Reboot['after_run']
-		}
-
-	reboot { 'after_run':
-	  apply => finished,
+	if ($osfamily == 'windows') and ($facts['os']['release']['full']== '2012 R2') {
+		dsc_windowsfeature{'Web-Asp-Net45':
+	    dsc_ensure => 'Present',
+	    dsc_name   => 'Web-Asp-Net45',
+	  }->
+		
+		dsc_windowsfeature{'Net-Wcf-Tcp-PortSharing45':
+	    dsc_ensure => 'Present',
+	    dsc_name   => 'Net-Wcf-Tcp-PortSharing45',
+	  }
 	}
-
 }

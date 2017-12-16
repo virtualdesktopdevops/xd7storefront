@@ -1,4 +1,5 @@
 define xd7storefront::netscalergateway (
+  $netscaler_name,
   $netscaler_external_url = 'http://ext.domain.net',
   $netscaler_authentication_method = 'SmartCard',
   $netscaler_smartcardfallbacklogontype = 'None',
@@ -8,7 +9,7 @@ define xd7storefront::netscalergateway (
 )
 {  
   dsc_sfgateway{'NetscalerGateway':
-    dsc_name => 'NetscalerGateway',
+    dsc_name => $netscaler_name,
     dsc_url => $netscaler_external_url,
     dsc_logontype => $netscaler_authentication_method,
     dsc_callbackurl => $netscaler_callback_url,
