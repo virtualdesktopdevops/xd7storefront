@@ -1,17 +1,17 @@
 {
-  "author": "citrixdeployment",
+  "author": "virtualdesktopdevops",
   "dependencies": [
-	{ 
-		"name": "puppetlabs/registry", 
+	{
+		"name": "puppetlabs/registry",
 		"version_requirement": ">= 1.1.4"
 	},
-	{ 
-		"name": "puppetlabs/dsc", 
-		"version_requirement": ">= 1.4.0"
+	{
+		"name": "virtualdesktopdevops/dsc",
+		"version_requirement": ">= 1.5.0"
 	}
   ],
   "license": "Apache-2.0",
-  "name": "citrixdeployment-xd7storefront",
+  "name": "virtualdesktopdevops-xd7storefront",
   "operatingsystem_support": [
     {
       "operatingsystem": "windows",
@@ -21,15 +21,16 @@
       ]
     }
   ],
-  "project_page": "https://www.citrixdeployment.com",
+  "project_page": "https://www.virtualdesktopdevops.com",
   "requirements": [
   	{
       "name": "puppet",
-      "version_requirement": ">= 3.8.0 < 6.0.0"
+      "version_requirement": ">= 4.0.0 < 6.0.0"
     }
   ],
-  "source": "https://www.citrixdeployment.com",
-  "summary": "Xendesktop 7.x Storefront installation; store & netscaler gateway creation",
+  "source": "https://virtualdesktopdevops.github.io/xd7storefront/",
+  "issues_url": "https://github.com/virtualdesktopdevops/xd7storefront/issues",
+  "summary": "Citrix Xendesktop 7.x Storefront installation module including puppet types definitions for store & netscaler gateway registration",
   "tags": [
     "powershell",
     "dsc",

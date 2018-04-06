@@ -11,23 +11,23 @@
 # Sample Usage:
 #
 class xd7storefront (
-	$baseurl, # http(s)://FQDN of the required Storefront URL. In case of cluster, use cluster URL
-	$setup_svc_username,
-	$setup_svc_password,
-	$sourcepath,
-	$xd7sitename,
-	$xd7farmType = "XenDesktop", # XenDesktop or XenApp
-	$deliverycontrollers, # List of XML servers (FQDN)
-	$deliveryControllersPort = 443, # XML port
-	$deliveryControllersTransportType = "HTTPS", # XML transport type
-  $deliveryControllersLoadBalance = true,
-  $storefrontAuthMethods = ['ExplicitForms','IntegratedWindows'],
-	$https = false,
-	$sslCertificateSourcePath = '',
-	$sslCertificatePassword = '',
-	$sslCertificateThumbprint = '',
-  $caCertificateSourcePath = '',
-  $caCertificateThumbprint = ''
+  $baseurl, # http(s)://FQDN of the required Storefront URL. In case of cluster, use cluster URL
+  $setup_svc_username,
+  $setup_svc_password,
+  $sourcepath,
+  $xd7sitename,
+  $deliverycontrollers, # List of XML servers (FQDN)
+  $deliverycontrollersport          = 443, # xml port
+  $deliverycontrollerstransporttype = 'https', # xml transport type
+  $deliverycontrollersloadbalance   = true,
+  $xd7farmtype                      = 'XenDesktop', # XenDesktop or XenApp
+  $storefrontauthmethods            = ['ExplicitForms','IntegratedWindows'],
+  $https                            = false,
+  $sslcertificatesourcepath         = '',
+  $sslcertificatepassword           = '',
+  $sslcertificatethumbprint         = '',
+  $cacertificatesourcepath          = '',
+  $cacertificatethumbprint          = ''
 )
 
 {
@@ -37,13 +37,12 @@ class xd7storefront (
   contain xd7storefront::networkconfig
   contain xd7storefront::sslconfig
   #contain xd7storefront::service
-  
-  Class['::xd7storefront::installwindowsfeatures'] ->
-  Class['::xd7storefront::installstorefront'] ->
-  Class['::xd7storefront::config'] ->
-  Class['::xd7storefront::networkconfig'] ->
-  Class['::xd7storefront::sslconfig']
-  #Class['::xd7storefront::service']
-  
- 
+
+  Class['::xd7storefront::installwindowsfeatures']
+->Class['::xd7storefront::installstorefront']
+->Class['::xd7storefront::config']
+->Class['::xd7storefront::networkconfig']
+->Class['::xd7storefront::sslconfig']
+#->Class['::xd7storefront::service']
+
 }
