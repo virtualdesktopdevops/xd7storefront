@@ -61,7 +61,7 @@ class xd7storefront::config inherits xd7storefront {
 
   #Disable CRL checking. Causing excepssive delay when storefront logon page is displayed
   #http://www.carlstalhood.com/storefront-3-5-tweaks/#crl
-  dsc_script{ 'CitrixBrokerServiceSSL':
+  dsc_script{ 'DisableCRLChecking':
     dsc_getscript  => 'Return @{ Result = $false) }',
     dsc_testscript => 'Return $false',
     dsc_setscript  => 'Add-PSSnapin Citrix.DeliveryServices.Framework.Commands
