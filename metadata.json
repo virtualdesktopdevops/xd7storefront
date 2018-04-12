@@ -30,7 +30,7 @@
   ],
   "source": "https://virtualdesktopdevops.github.io/xd7storefront/",
   "issues_url": "https://github.com/virtualdesktopdevops/xd7storefront/issues",
-  "summary": "Citrix Xendesktop 7.x Storefront installation module including puppet types definitions for store & netscaler gateway registration",
+  "summary": "Citrix Xendesktop 7.x Storefront puppet module. Module including storefront installation and initial configuration as well as puppet types definitions for store & netscaler gateway registration",
   "tags": [
     "powershell",
     "dsc",
