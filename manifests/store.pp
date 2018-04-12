@@ -1,13 +1,13 @@
 #Type for Citrix Storefront store creation
 define xd7storefront::store (
-  $storename,
-  $xd7sitename,
-  $xd7farmtype,
-  $deliverycontrollers,
-  $deliverycontrollerstransporttype = 'HTTPS',
-  $deliverycontrollersport          = 443,
-  $deliverycontrollersloadbalance   = true,
-  $storefrontauthmethods            = ['ExplicitForms','IntegratedWindows']
+  String $storename,
+  String $xd7sitename,
+  Array[String] $deliverycontrollers,
+  Optional[String] $deliverycontrollerstransporttype = 'https',
+  Optional[Integer] $deliverycontrollersport         = 443,
+  Optional[Boolean] $deliverycontrollersloadbalance  = true,
+  Enum['XenDesktop', 'XenApp']$xd7farmtype           = 'XenDesktop',
+  Array[String] $storefrontauthmethods               = ['ExplicitForms','IntegratedWindows']
 )
 {
   #Adds an authentication service to Storefront group/cluster.

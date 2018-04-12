@@ -11,23 +11,23 @@
 # Sample Usage:
 #
 class xd7storefront (
-  $baseurl, # http(s)://FQDN of the required Storefront URL. In case of cluster, use cluster URL
-  $setup_svc_username,
-  $setup_svc_password,
-  $sourcepath,
-  $xd7sitename,
-  $deliverycontrollers, # List of XML servers (FQDN)
-  $deliverycontrollersport          = 443, # xml port
-  $deliverycontrollerstransporttype = 'https', # xml transport type
-  $deliverycontrollersloadbalance   = true,
-  $xd7farmtype                      = 'XenDesktop', # XenDesktop or XenApp
-  $storefrontauthmethods            = ['ExplicitForms','IntegratedWindows'],
-  $https                            = false,
-  $sslcertificatesourcepath         = '',
-  $sslcertificatepassword           = '',
-  $sslcertificatethumbprint         = '',
-  $cacertificatesourcepath          = '',
-  $cacertificatethumbprint          = ''
+  String $baseurl, # http(s)://FQDN of the required Storefront URL. In case of cluster, use cluster URL
+  String $setup_svc_username,
+  String $setup_svc_password,
+  String $sourcepath,
+  String $xd7sitename,
+  Array[String] $deliverycontrollers, # List of XML servers (FQDN)
+  Optional[Integer] $deliverycontrollersport         = 443,
+  Optional[String] $deliverycontrollerstransporttype = 'https',
+  Optional[Boolean] $deliverycontrollersloadbalance  = true,
+  Enum['XenDesktop', 'XenApp'] $xd7farmtype          = 'XenDesktop',
+  Array[String] $storefrontauthmethods               = ['ExplicitForms','IntegratedWindows'],
+  Optional[Boolean] $https                           = false,
+  Optional[String] $sslcertificatesourcepath         = '',
+  Optional[String] $sslcertificatepassword           = '',
+  Optional[String] $sslcertificatethumbprint         = '',
+  Optional[String] $cacertificatesourcepath          = '',
+  Optional[String] $cacertificatethumbprint          = ''
 )
 
 {

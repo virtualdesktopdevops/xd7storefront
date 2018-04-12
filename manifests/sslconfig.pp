@@ -35,21 +35,19 @@ class xd7storefront::sslconfig inherits xd7storefront {
     }
 
     dsc_xwebsite{ 'DefaultWebSiteSSL':
-      dsc_name => 'Default Web Site',
+      dsc_name        => 'Default Web Site',
       dsc_bindinginfo => [
-        { protocol => 'http', port => '443', certificatethumbprint => $sslCertificateThumbprint, certificatestorename => 'WebHosting' }
-        ],
-      require => Dsc_xpfximport['ImportSSLCert']
+        { protocol              => 'https',
+          port                  => '443',
+          certificatethumbprint => $xd7storefront::sslcertificatethumbprint,
+          certificatestorename  => 'WebHosting' }],
+      require         => Dsc_xpfximport['ImportSSLCert']
     }
-
   }
   else {
-    	dsc_xwebsite{ 'DefaultWebSite':
-    		dsc_name => 'Default Web Site',
-    		#dsc_physicalpath => '%SystemDrive%\inetpub\wwwroot',
-    		dsc_bindinginfo => [
-    		 { protocol => 'http', port => '80'}
-    		 ],
-      }
+    dsc_xwebsite{ 'DefaultWebSite':
+      dsc_name        => 'Default Web Site',
+      dsc_bindinginfo => [{ protocol => 'http', port => '80'}],
     }
+  }
 }

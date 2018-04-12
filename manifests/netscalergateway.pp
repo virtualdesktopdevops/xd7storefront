@@ -1,12 +1,12 @@
 #Type for Citrix Netscaler Gateway declaration in Citrix Storefront
 define xd7storefront::netscalergateway (
-  $netscaler_name,
-  $netscaler_external_url               = 'http://ext.domain.net',
-  $netscaler_authentication_method      = 'SmartCard',
-  $netscaler_smartcardfallbacklogontype = 'None',
-  $netscaler_callback_url               = 'http://callback.domain.net',
-  $netscaler_snip                       = '192.168.1.200',
-  $sta_urls                             = ['http://srv-cxdc01.domain.net/scripts/ctxsta.dll'],
+  String $netscaler_name,
+  String $netscaler_external_url,
+  Enum['UsedForHDXOnly', 'Domain', 'RSA', 'DomainAndRSA', 'SMS', 'GatewayKnows', 'SmartCard', 'None']v$netscaler_authentication_method,
+  String $netscaler_callback_url,
+  String$netscaler_snip,
+  Array[String] $sta_urls,
+  Optional[String] $netscaler_smartcardfallbacklogontype = 'None',
 )
 {
   dsc_sfgateway{'NetscalerGateway':
