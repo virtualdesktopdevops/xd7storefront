@@ -55,7 +55,7 @@ class xd7storefront::config inherits xd7storefront {
     dsc_servers          => $xd7storefront::deliverycontrollers,
     dsc_transporttype    => $xd7storefront::deliverycontrollerstransporttype,
     dsc_loadbalance      => $xd7storefront::deliverycontrollersloadbalance,
-    #dsc_port => $deliveryControllersPort,
+    dsc_port             => $xd7storefront::deliverycontrollersport,
     require              => Dsc_sfstore['DefaultStore']
   }
 

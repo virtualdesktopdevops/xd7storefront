@@ -49,6 +49,6 @@ define xd7storefront::store (
     dsc_servers          => $deliverycontrollers,
     dsc_transporttype    => $deliverycontrollerstransporttype,
     dsc_loadbalance      => $deliverycontrollersloadbalance,
-    #dsc_serviceport     => $deliverycontrollersport,
+    dsc_port             => $deliverycontrollersport,
   }
 }
