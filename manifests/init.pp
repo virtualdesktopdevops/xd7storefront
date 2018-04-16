@@ -11,23 +11,23 @@
 # Sample Usage:
 #
 class xd7storefront (
-	$baseurl, # http(s)://FQDN of the required Storefront URL. In case of cluster, use cluster URL
-	$setup_svc_username,
-	$setup_svc_password,
-	$sourcepath,
-	$xd7sitename,
-	$xd7farmType = "XenDesktop", # XenDesktop or XenApp
-	$deliverycontrollers, # List of XML servers (FQDN)
-	$deliveryControllersPort = 443, # XML port
-	$deliveryControllersTransportType = "HTTPS", # XML transport type
-  $deliveryControllersLoadBalance = true,
-  $storefrontAuthMethods = ['ExplicitForms','IntegratedWindows'],
-	$https = false,
-	$sslCertificateSourcePath = '',
-	$sslCertificatePassword = '',
-	$sslCertificateThumbprint = '',
-  $caCertificateSourcePath = '',
-  $caCertificateThumbprint = ''
+  String $baseurl, # http(s)://FQDN of the required Storefront URL. In case of cluster, use cluster URL
+  String $setup_svc_username,
+  String $setup_svc_password,
+  String $sourcepath,
+  String $xd7sitename,
+  Array[String] $deliverycontrollers, # List of XML servers (FQDN)
+  Optional[Integer] $deliverycontrollersport         = 443,
+  Optional[String] $deliverycontrollerstransporttype = 'https',
+  Optional[Boolean] $deliverycontrollersloadbalance  = true,
+  Enum['XenDesktop', 'XenApp'] $xd7farmtype          = 'XenDesktop',
+  Array[String] $storefrontauthmethods               = ['ExplicitForms','IntegratedWindows'],
+  Optional[Boolean] $https                           = false,
+  Optional[String] $sslcertificatesourcepath         = '',
+  Optional[String] $sslcertificatepassword           = '',
+  Optional[String] $sslcertificatethumbprint         = '',
+  Optional[String] $cacertificatesourcepath          = '',
+  Optional[String] $cacertificatethumbprint          = ''
 )
 
 {
@@ -37,13 +37,12 @@ class xd7storefront (
   contain xd7storefront::networkconfig
   contain xd7storefront::sslconfig
   #contain xd7storefront::service
-  
-  Class['::xd7storefront::installwindowsfeatures'] ->
-  Class['::xd7storefront::installstorefront'] ->
-  Class['::xd7storefront::config'] ->
-  Class['::xd7storefront::networkconfig'] ->
-  Class['::xd7storefront::sslconfig']
-  #Class['::xd7storefront::service']
-  
- 
+
+  Class['::xd7storefront::installwindowsfeatures']
+->Class['::xd7storefront::installstorefront']
+->Class['::xd7storefront::config']
+->Class['::xd7storefront::networkconfig']
+->Class['::xd7storefront::sslconfig']
+#->Class['::xd7storefront::service']
+
 }
