@@ -1,5 +1,6 @@
 pkg/
 tests/
 assets/
+_layouts/
 _config.yml
 .fixtures.yml
